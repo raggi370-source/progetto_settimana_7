@@ -1,0 +1,294 @@
+/* SportsHub — Week Project Settimana VII
+   Reset minimale + tipografia di base. Aggiungi qui le tue regole. */
+
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #f4f6fa;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.site-header {
+  background-color: hsl(220, 60%, 25%);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
+#cerca{
+  border-radius: 8px;
+  border:none;
+  width: 50%;
+  height: 30px;
+  color: black;
+}
+#cerca_button{
+  border-radius: 8px;
+  border: none;
+  color: blue;
+  background-color: #ffff;
+}
+#cerca_button:hover{
+  background-color: rgb(7, 0, 134);
+  color: #f4f6fa;
+}
+
+
+
+
+
+
+.card-squadra{
+  border-radius: 8px;
+  background-color: #ffff;
+  border: 1px solid black
+}
+.nome_squadra{
+  font-weight: bold;
+}
+#preferiti{
+  background-color: #1a1a1a;
+
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f3f5f9;
+  color: #252a34;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Fascia blu in alto */
+.site-header {
+  padding: 20px 16px 18px;
+  background: #1d3969;
+  color: white;
+  text-align: center;
+}
+
+.site-header h1 {
+  margin: 0 0 8px;
+  font-size: 25px;
+}
+
+.site-header p {
+  margin: 0 0 12px;
+  color: #dce5f4;
+  font-size: 11px;
+}
+
+#cerca {
+  width: min(360px, 65vw);
+  height: 34px;
+  padding: 7px 10px;
+  border: 1px solid #d5d9e2;
+  border-radius: 4px;
+}
+
+#cerca_button {
+  height: 34px;
+  margin-left: 5px;
+  padding: 0 14px;
+  border: 1px solid #cbd3e0;
+  border-radius: 4px;
+  background: white;
+  color: #1d3969;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Contenuto principale */
+main.container {
+  width: min(100% - 32px, 920px);
+  margin: 24px auto;
+}
+
+#messaggio {
+  min-height: 18px;
+  color: #52617a;
+}
+
+/* Risultati della ricerca: card in fila */
+#squadre {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  margin: 16px 0 24px;
+}
+
+
+
+.card-squadra {
+  width: min(100%, 220px);
+  min-height: 230px;
+  padding: 18px 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border: 1px solid #e2e7ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #252a34;
+  box-shadow: 0 3px 10px rgb(25 40 65 / 8%);
+
+  text-align: center;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.card-squadra:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgb(25 40 65 / 14%);
+}
+
+.seria {
+  margin: 4px 0 0;
+  color: #667085;
+  font-size: 0.9rem;
+}
+
+.paese {
+  margin: 0;
+  color: #7b8494;
+  font-size: 0.85rem;
+}
+
+.card-squadra img {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  margin-bottom: 4px;
+}
+
+/* Pulsante per aggiungere ai preferiti */
+.bottone_preferiti,
+.bottone-rimuovi {
+  width: 100%;
+  margin-top: 10px;
+  padding: 9px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: background-color 180ms ease, color 180ms ease,
+    border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.bottone_preferiti {
+  border-color: #b8c7df;
+  background: #eef3fa;
+  color: #244574;
+}
+
+.bottone_preferiti:hover {
+  border-color: #244574;
+  background: #244574;
+  color: #fff;
+  box-shadow: 0 3px 8px rgb(36 69 116 / 20%);
+}
+
+/* Pulsante per rimuovere dai preferiti */
+.bottone-rimuovi {
+  border-color: #f0b8b8;
+  background: #fff1f1;
+  color: #a83232;
+}
+
+.bottone-rimuovi:hover {
+  border-color: #a83232;
+  background: #a83232;
+  color: #fff;
+  box-shadow: 0 3px 8px rgb(168 50 50 / 20%);
+}
+
+
+
+
+
+/* Riquadro con eventi e risultati */
+#dettagli-section {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid #e5e8ee;
+  border-radius: 6px;
+  background: white;
+  box-shadow: 0 2px 5px rgb(25 40 65 / 8%);
+}
+
+#dettagli-section[hidden] {
+  display: none;
+}
+
+#titolo-squadra {
+  margin: 0 0 18px;
+  color: #294775;
+  font-size: 18px;
+}
+
+#dettagli-section h3 {
+  margin: 0 0 10px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid #9aabc5;
+  font-size: 14px;
+}
+
+#dettagli-section ul {
+  min-height: 36px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+}
+
+#dettagli-section li {
+  padding: 7px 0;
+  border-bottom: 1px solid #edf0f4;
+  font-size: 12px;
+}
+
+/* Due colonne su schermi più larghi */
+#dettagli-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+}
+
+#titolo-squadra {
+  grid-column: 1 / -1;
+}
+
+#dettagli-section h3:nth-of-type(1),
+#prossimi-eventi {
+  grid-column: 1;
+}
+
+#dettagli-section h3:nth-of-type(2),
+#risultati {
+  grid-column: 2;
+}
+
+
+
+/* Aggiungi qui le tue regole per: form, risultati, card squadra, eventi. */
