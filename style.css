@@ -115,7 +115,7 @@ main h3 {
 #preferiti,
 #squadre {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 14px;
   margin-top: 14px;
 }
