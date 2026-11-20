@@ -16,6 +16,7 @@
 // Per le versioni Intermedia/Avanzata: localStorage preferiti, debounce, Promise.all multi.
 const API_BASE = "https://www.thesportsdb.com/api/v1/json/123";
 
+
 // La classe trasforma i dati ricevuti dall'API in un oggetto Squadra.
 class Squadra {
     constructor(dati) {
@@ -44,60 +45,60 @@ class Evento {
 
 // Cerca le squadre in base al testo inserito.
 async function cercaSquadre(query) {
-  const url = API_BASE + "/searchteams.php?t=" + query;
-  const response = await fetch(url);
-  const dati = await response.json();
+    const url = API_BASE + "/searchteams.php?t=" + encodeURIComponent(query);
+    const response = await fetch(url);
+    const dati = await response.json();
 
-  const squadre = [];
+    const squadre = [];
 
-  if (dati.teams) {
-    for (const squadra of dati.teams) {
-      squadre.push(new Squadra(squadra));
+    if (dati.teams) {
+        for (const squadra of dati.teams) {
+            squadre.push(new Squadra(squadra));
+        }
     }
-  }
 
-  return squadre;
+    return squadre;
 }
 
 // Carica insieme gli eventi futuri e quelli passati usando l'ID della squadra.
 async function caricaDettagli(idTeam) {
-  // Chiede al sito le prossime partite
-  const urlProssimi = API_BASE + "/eventsnext.php?id=" + idTeam;
-  const rispostaProssimi = await fetch(urlProssimi);
-  const datiProssimi = await rispostaProssimi.json();
+    
+    const [rispostaProssimi, rispostaPrecedenti] = await Promise.all([
+        fetch(API_BASE + "/eventsnext.php?id=" + idTeam),
+        fetch(API_BASE + "/eventslast.php?id=" + idTeam)
+    ]);
+    const [datiProssimi, datiPrecedenti] = await Promise.all([
+        rispostaProssimi.json(),
+        rispostaPrecedenti.json()
+    ]);
 
-  // Chiede al sito le partite precedenti
-  const urlPrecedenti = API_BASE + "/eventslast.php?id=" + idTeam;
-  const rispostaPrecedenti = await fetch(urlPrecedenti);
-  const datiPrecedenti = await rispostaPrecedenti.json();
+    // Crea due liste vuote
+    const prossimi = [];
+    const precedenti = [];
 
-  // Crea due liste vuote
-  const prossimi = [];
-  const precedenti = [];
-
-  // Aggiunge alla prima lista gli eventi futuri
-  if (datiProssimi.events) {
-    for (const evento of datiProssimi.events) {
-      prossimi.push(new Evento(evento));
+    // Aggiunge alla prima lista gli eventi futuri
+    if (datiProssimi.events) {
+        for (const evento of datiProssimi.events) {
+            prossimi.push(new Evento(evento));
+        }
     }
-  }
 
-  // Aggiunge alla seconda lista gli eventi precedenti
-  if (datiPrecedenti.results) {
-    for (const evento of datiPrecedenti.results) {
-      precedenti.push(new Evento(evento));
+    // Aggiunge alla seconda lista gli eventi precedenti
+    if (datiPrecedenti.results) {
+        for (const evento of datiPrecedenti.results) {
+            precedenti.push(new Evento(evento));
+        }
+    } else if (datiPrecedenti.events) {
+        for (const evento of datiPrecedenti.events) {
+            precedenti.push(new Evento(evento));
+        }
     }
-  } else if (datiPrecedenti.events) {
-    for (const evento of datiPrecedenti.events) {
-      precedenti.push(new Evento(evento));
-    }
-  }
 
-  // Restituisce entrambe le liste
-  return {
-    prossimi: prossimi,
-    precedenti: precedenti
-  };
+    // Restituisce entrambe le liste
+    return {
+        prossimi: prossimi,
+        precedenti: precedenti
+    };
 }
 
 // Mostra le card delle squadre trovate.
@@ -152,16 +153,12 @@ function mostraSquadre(squadre) {
         contenitore.append(card);
 
 
-
-
-
-
         bPrefe.addEventListener("click", (evento) => {
             evento.stopPropagation();
 
             const sezionePreferiti = document.querySelector("#preferiti");
 
-            
+
             sezionePreferiti.append(card);
             bPrefe.remove();
 
@@ -173,11 +170,11 @@ function mostraSquadre(squadre) {
             bottoneRimuovi.addEventListener("click", (evento) => {
                 evento.stopPropagation();
 
-                
+
                 document.querySelector("#squadre").append(card);
                 bottoneRimuovi.remove();
 
-                
+
                 card.append(bPrefe);
             });
         });
@@ -200,13 +197,28 @@ function mostraListaEventi(selettore, eventi, sonoRisultati = false) {
 
     for (const evento of eventi) {
         const voce = document.createElement("li");
+        voce.className = "lista_risultati";
+
+        const data = document.createElement("small");
+        data.className = "data-evento";
+        data.textContent = evento.data;
+
+        const partita = document.createElement("span");
+        partita.className = "nome-partita";
 
         if (sonoRisultati) {
-            voce.textContent =
-                `${evento.data}: ${evento.casa} ${evento.risultato} ${evento.ospite}`;
+            partita.textContent = evento.casa + " vs " + evento.ospite;
         } else {
-            voce.textContent =
-                `${evento.data}: ${evento.casa} - ${evento.ospite}`;
+            partita.textContent = evento.casa + " vs " + evento.ospite;
+        }
+
+        voce.append(data, partita);
+
+        if (sonoRisultati) {
+            const punteggio = document.createElement("span");
+            punteggio.className = "punteggio";
+            punteggio.textContent = evento.risultato;
+            voce.append(punteggio);
         }
 
         lista.append(voce);
@@ -262,7 +274,7 @@ const para_scritta = document.querySelector("#ptrovate")
 const input_value = document.querySelector("#cerca")
 
 input_value.addEventListener("input", async (evento) => {
-    
+
     para_scritta.hidden = false;
     const query = evento.target.value.trim();
 
@@ -279,3 +291,23 @@ input_value.addEventListener("input", async (evento) => {
         document.querySelector("#messaggio").textContent = errore.message;
     }
 });
+// Filtro: agisce sulle card dei preferiti
+function filtraPreferiti(sport) {
+    const cards = document.querySelectorAll("#preferiti .card-squadra");
+    for (const card of cards) {
+        card.hidden = !(sport === "tutti" || card.dataset.sport === sport);
+    }
+}
+
+for (const bottone of document.querySelectorAll(".filtro")) {
+    bottone.addEventListener("click", () => {
+        filtraPreferiti(bottone.dataset.sport);
+    });
+}
+
+// Mostra/nasconde il messaggio "nessun preferito"
+function aggiornaMessaggioPreferiti() {
+    const vuoto = document.querySelectorAll("#preferiti .card-squadra").length === 0;
+    document.querySelector(".para_prefe").hidden = !vuoto;
+}
+aggiornaMessaggioPreferiti();
