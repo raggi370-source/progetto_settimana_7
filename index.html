@@ -11,31 +11,50 @@
 
 <body>
   <header class="site-header">
-  <div id="div_prefe" class="container">
-    <h1 class="fw-bold">SportsHub</h1>
-    <p>Cerca una squadra, scopri le prossime partite e gli ultimi risultati</p>
+    <div id="div_prefe" class="container">
+      <h1 class="fw-bold">SportsHub</h1>
+      <p>Cerca una squadra, scopri le prossime partite e gli ultimi risultati</p>
 
-    <input type="search" id="cerca" placeholder="Cerca una squadra...">
-    <button id="cerca_button" type="button">Cerca</button>
+      <input type="search" id="cerca" placeholder="Cerca una squadra...">
+      <button id="cerca_button" type="button">Cerca</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <h3>⭐ Le tue squadre preferite</h3>
+    <div class="row">
+ <div class="row g-2 my-3">
+  <div class="col-6 col-sm">
+    <button id="tutti" class="filtro btn btn-outline-primary w-100" data-sport="tutti" type="button">
+      Tutti
+    </button>
   </div>
-</header>
 
-<main class="container">
-  <h3>⭐ Le tue squadre preferite</h3>
-
-  <div id="filtri">
-    <button class="filtro" data-sport="tutti">Tutti</button>
-    <button class="filtro" data-sport="Basketball">Basket</button>
-    <button class="filtro" data-sport="Soccer">Calcio</button>
-    <button class="filtro" data-sport="American Football">Football</button>
+  <div class="col-6 col-sm">
+    <button id="basket" class="filtro btn btn-outline-primary w-100" data-sport="Basketball" type="button">
+      Basket
+    </button>
   </div>
 
-  <p class="para_prefe">Non hai ancora salvato nessuna squadra, cercane una qui sopra e aggiungila ai preferiti</p>
-  <div id="preferiti"></div>
+  <div class="col-6 col-sm">
+    <button id="calcio" class="filtro btn btn-outline-primary w-100" data-sport="Soccer" type="button">
+      Calcio
+    </button>
+  </div>
+
+  <div class="col-6 col-sm">
+    <button id="football" class="filtro btn btn-outline-primary w-100" data-sport="American Football" type="button">
+      Football
+    </button>
+  </div>
+</div>
+
+    <p class="para_prefe" hi>Non hai ancora salvato nessuna squadra, cercane una qui sopra e aggiungila ai preferiti</p>
+    <div id="preferiti"></div>
 
     <section id="risultati-section">
       <h3>Squadre trovate</h3>
-      <p id="ptrovate" hidden>inizia cercando una squadra qui sopr</p>
+      <p id="ptrovate" hidden>inizia cercando una squadra qui sopra</p>
       <div id="squadre"></div>
     </section>
 

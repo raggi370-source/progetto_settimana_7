@@ -116,6 +116,7 @@ function mostraSquadre(squadre) {
         const card = document.createElement("button");
         card.type = "button";
         card.className = "card-squadra";
+        card.dataset.sport = squadra.sport;
 
         const nome_squadra = document.createElement("span");
         nome_squadra.className = "nome_squadra"
