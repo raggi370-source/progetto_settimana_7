@@ -22,7 +22,7 @@
 
   <main class="container">
     <h3>⭐ Le tue squadre preferite</h3>
-    <div class="row">
+
  <div class="row g-2 my-3">
   <div class="col-6 col-sm">
     <button id="tutti" class="filtro btn btn-outline-primary w-100" data-sport="tutti" type="button">
@@ -49,7 +49,7 @@
   </div>
 </div>
 
-    <p class="para_prefe" hi>Non hai ancora salvato nessuna squadra, cercane una qui sopra e aggiungila ai preferiti</p>
+    <p class="para_prefe" >Non hai ancora salvato nessuna squadra, cercane una qui sopra e aggiungila ai preferiti</p>
     <div id="preferiti"></div>
 
     <section id="risultati-section">
@@ -62,6 +62,8 @@
 
 
     <section id="dettagli-section" hidden>
+      <div class="row">
+        <div class="col-6 col-sm">
       <p id="messaggio"></p>
       <h2 id="titolo-squadra" class="fw-bold"></h2>
 
@@ -74,10 +76,26 @@
         <h3 class="fw-bold col-md-12 col-lg-6">Risultati precedenti</h3>
         <ul id="risultati"></ul>
       </div>
+      </div>
     </section>
-  </main>
 
-  <script src="script.js"></script>
+
+
+    <div class="modal fade" id="modal-evento" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-titolo"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+      </div>
+      <div class="modal-body" id="modal-corpo"></div>
+    </div>
+  </div>
+</div>
+
+  </main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
 </body>
 
 </html>
